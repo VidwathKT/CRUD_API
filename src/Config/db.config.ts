@@ -1,24 +1,18 @@
+
 //importing modules
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
 dotenv.config()
 
-//   //details from the env
-// const username = process.env.username
-// const password = process.env.password
-// const dbName = 'Post'
+  //details from the env
+const username = process.env.username
+const password = process.env.password
+const dbName = 'Post'
 
-//connection string to mongo atlas
+//connection string to mongo compass
 
-const connectionString: string | undefined = process.env.CONNECTION_STRING;
-
-
-if (!connectionString) {
-    console.error("Error: CONNECTION_STRING is not defined in the environment variables.");
-    process.exit(1);
-  }
-  
+const connectionString = `mongodb://127.0.0.1:27017/${dbName}`
 const options = {
     autoIndex: false, // Don't build indexes
     maxPoolSize: 10, // Maintain up to 10 socket connections
@@ -31,7 +25,7 @@ const options = {
 export const db = mongoose.connect(connectionString, options)
 .then(res => {
     if(res){
-        console.log(`Database connection succeffully`)
+        console.log(`Database connection succeffully to ${dbName}`)
     }
     
 }).catch(err => {
